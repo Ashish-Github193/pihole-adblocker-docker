@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    ports:
+      - "10053:53/tcp"
+      - "10053:53/udp"
+      - "80:80/tcp"
+    environment:
+      TZ: "Asia/Kolkata"
+      WEBPASSWORD: hello123
+    volumes:
+      - "./etc-pihole:/etc/pihole"
+      - "./etc-dnsmasq.d:/etc/dnsmasq.d"
+    restart: unless-stopped
+    dns:
+      - 1.1.1.1
+      - 127.0.0.1
